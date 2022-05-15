@@ -1,2 +1,2 @@
-# Weight_Time
-Our application
+22.05.16 React, Firebase Setup
+Firebase App User 추가
