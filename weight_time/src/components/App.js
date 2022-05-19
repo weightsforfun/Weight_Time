@@ -1,20 +1,25 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "../routes/Home";
-import Partner from "../routes/Partner";
-import Timetable from "../routes/Timetable";
-import Trainer from "../routes/Trainer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {auth} from "../firebase";
+import AppRouter from "./Router";
+
 function App() {
+  const [init, setInit] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+      setInit(true);
+    });
+  }, []);
   return (
-    <Router>
-      <Routes>
-        <Route path="Home" element={<Home />} />
-        <Route path="/Partner" element={<Partner />} />
-        <Route path="/Timetable" element={<Timetable />} />
-        <Route path="/Trainer" element={<Trainer />} />
-      </Routes>
-    </Router>
+    <>
+      {init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing..."}
+    </>
   );
 }
 
