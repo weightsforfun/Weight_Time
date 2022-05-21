@@ -1,0 +1,48 @@
+.m_nav {
+    width: 414px;
+    position: fixed;
+    bottom: 0px;
+    border: 2px solid red;
+}
+
+.main_dis {
+    width: 414px;
+    background-color: #000000;
+    margin: auto;
+    text-align: center;
+    border: 2px solid red;
+
+}
+
+.nav1 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+    justify-content: space-around;
+}
+
+.top_c {
+    font-size: 12px;
+    font-weight: 700;
+    color: #c4c4c4;
+    text-decoration: none;
+    margin-left: 20px;
+
+
+
+
+}
+
+.mar_auto {
+
+    border: 2px solid red;
+    text-align: center;
+    color: #ffffff;
+}
+
+.btn_pos {
+    display: inline-block;
+    border: 2px solid red;
+
+}
