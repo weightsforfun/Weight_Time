@@ -3,7 +3,7 @@ const TimetablePage = () => {
   const [day, setDay] = useState("월요일");
   const [startTime, setStartTime] = useState(6);
   const [endTime, setEndTime] = useState(22);
-  const [workoutPart, setWorkoutPart] = useState([1, 1, 1, 1, 1]);
+  const [workoutPart, setWorkoutPart] = useState([0, 0, 0, 0, 0]);
   const onSubmit = (event) => {
     event.preventDefault();
     console.log(startTime, endTime);
@@ -30,13 +30,15 @@ const TimetablePage = () => {
   const onChangePart = (event) => {
     const {
       target: { id },
-      checked: { checked },
+    } = event;
+    const {
+      target: { checked },
     } = event;
     if (checked) {
-      workoutPart.add(id);
+      workoutPart[id] = 1;
       setWorkoutPart(workoutPart);
-    } else if (!checked && workoutPart.has(id)) {
-      setWorkoutPart.delete(id);
+    } else if (!checked && workoutPart[id] === 1) {
+      setWorkoutPart[id] = 0;
       setWorkoutPart(workoutPart);
     }
   };
