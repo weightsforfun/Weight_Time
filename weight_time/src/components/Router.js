@@ -1,23 +1,28 @@
 import React from "react";
-import { HashRouter as Router, Route, Routes} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "../routes/Home";
 import Partner from "../routes/Partner";
-import Timetable from "../routes/Timetable";
+import TimetablePage from "../routes/TimetablePage";
 import Trainer from "../routes/Trainer";
 import Auth from "../routes/Auth";
-import  { Navigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
+import Navigation from "./Navigation";
 
 const AppRouter = ({ isLoggedIn }) => {
-    return (
+  return (
     <Router>
-        <Routes>
-            <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} /> 
-            <Route path="/Auth" element={isLoggedIn ? <Navigate to="/" replace /> : <Auth />}/>
-            <Route path="/Partner" element={<Partner />} />
-            <Route path="/Timetable" element={<Timetable />} />
-            <Route path="/Trainer" element={<Trainer />} />
-        </Routes>
+      <Navigation isLoggedIn={isLoggedIn} />
+      <Routes>
+        <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
+        <Route
+          path="/Auth"
+          element={isLoggedIn ? <Navigate to="/" replace /> : <Auth />}
+        />
+        <Route path="/Partner" element={<Partner />} />
+        <Route path="/TimetablePage" element={<TimetablePage />} />
+        <Route path="/Trainer" element={<Trainer />} />
+      </Routes>
     </Router>
-    )
+  );
 };
 export default AppRouter;
