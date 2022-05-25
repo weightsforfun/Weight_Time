@@ -6,19 +6,29 @@ const TimetablePage = () => {
   const [day, setDay] = useState("월요일");
   const [startTime, setStartTime] = useState(6);
   const [endTime, setEndTime] = useState(22);
-  const [workoutPart, setWorkoutPart] = useState([0, 0, 0, 0, 0]);
+  const [workoutPart, setWorkoutPart] = useState([0, 0, 0, 0, 0]); //등 가슴 팔 어깨 하체
   const onSubmit = (event) => {
+    const partIndex = ["back", "chest", "arm", "shoulder", "leg"];
     event.preventDefault();
-    try {
-      addDoc(collection(dbService, "arm"), {
-        startTime,
-        endTime
-      });
-    } catch (error) {
-      console.error("Error adding document: ", error);
+    for (var i = 0; i < 5; i++) {
+      if (workoutPart[i] === 1) {
+        try {
+          addDoc(collection(dbService, partIndex[i]), {
+            startTime,
+            endTime,
+            day,
+          });
+        } catch (error) {
+          console.error("Error adding document: ", error);
+        }
+      }
     }
     console.log(startTime, endTime);
     console.log(workoutPart);
+    for (var i = 0; i < 5; i++) {
+      workoutPart[i] = 0;
+    }
+    setWorkoutPart(workoutPart);
   };
   const onChangeDay = (event) => {
     const {
@@ -128,39 +138,39 @@ const TimetablePage = () => {
       </div>
       <div className="selectTableBox">
         <form>
-          <label for="1">back</label>
+          <label for="0">back</label>
           <input
             type="checkbox"
             value="등"
-            id="1"
+            id="0"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="2">chest</label>
+          <label for="1">chest</label>
           <input
             type="checkbox"
             value="가슴"
-            id="2"
+            id="1"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="3">arm</label>
+          <label for="2">arm</label>
           <input
             type="checkbox"
             value="팔"
-            id="3"
+            id="2"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="4">shoulder</label>
+          <label for="3">shoulder</label>
           <input
             type="checkbox"
             value="어깨"
-            id="4"
+            id="3"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="5">leg</label>
+          <label for="4">leg</label>
           <input
             type="checkbox"
             value="하체"
-            id="5"
+            id="4"
             onChange={onChangePartForSubmit}
           ></input>
           <button>시간표보기</button>
