@@ -1,45 +1,54 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './components/App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./components/App";
 import { Component } from "react";
 import { render } from "react-dom";
 import moment from "moment";
 import Timetable from "react-timetable-events";
 
 class Appi extends Component {
+  monday_arr = [
+    {
+      id: 1,
+      name: "Custom Event 1",
+      type: "custom",
+      startTime: moment("2018-02-23T11:30:00"),
+      endTime: moment("2018-02-23T13:30:00"),
+    },
+  ];
+  tuesday_arr = [
+    {
+      id: 2,
+      name: "Custom Event 2",
+      type: "custom",
+      startTime: moment("2018-02-22T12:30:00"),
+      endTime: moment("2018-02-22T14:30:00"),
+    },
+    {
+      id: 3,
+      name: "Custom Event 3",
+      type: "custom",
+      startTime: moment("2018-02-22T16:30:00"),
+      endTime: moment("2018-02-22T18:45:00"),
+    },
+    {
+      id: 4,
+      name: "Custom Event 4",
+      type: "custom",
+      startTime: moment("2018-02-23T11:30:00"),
+      endTime: moment("2018-02-23T13:30:00"),
+    },
+  ];
   constructor(props, context) {
     super(props, context);
     this.state = {
       timetableProps: {
         events: {
-          monday: [
-            {
-              id: 1,
-              name: "Custom Event 1",
-              type: "custom",
-              startTime: moment("2018-02-23T11:30:00"),
-              endTime: moment("2018-02-23T13:30:00")
-            }
-          ],
-          tuesday: [
-            {
-              id: 2,
-              name: "Custom Event 2",
-              type: "custom",
-              startTime: moment("2018-02-22T12:30:00"),
-              endTime: moment("2018-02-22T14:30:00")
-            },
-            {
-              id: 3,
-              name: "Custom Event 3",
-              type: "custom",
-              startTime: moment("2018-02-22T16:30:00"),
-              endTime: moment("2018-02-22T18:45:00")
-            }
-          ],
+          monday: this.monday_arr,
+          tuesday: this.tuesday_arr,
           wednesday: [],
           thursday: [],
-          friday: []
+          friday: [],
         },
         hoursInterval: [1, 24],
         timeLabel: "Time :)",
@@ -51,7 +60,7 @@ class Appi extends Component {
               style={{
                 ...defaultAttributes.style,
                 textAlign: "center",
-                textDecoration: "underline"
+                textDecoration: "underline",
               }}
             >
               {hour}
@@ -67,7 +76,7 @@ class Appi extends Component {
               style={{
                 ...defaultAttributes.style,
                 background: "#000",
-                borderRadius: "50px"
+                borderRadius: "50px",
               }}
             >
               <span className={styles.event_info}>[ {event.name} ]</span>
@@ -77,8 +86,8 @@ class Appi extends Component {
               </span>
             </div>
           );
-        }
-      }
+        },
+      },
     };
   }
 
@@ -87,12 +96,12 @@ class Appi extends Component {
   }
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <>
-    <App />
-    <Appi />
+      <App />
+      <Appi />
     </>
   </React.StrictMode>
 );
