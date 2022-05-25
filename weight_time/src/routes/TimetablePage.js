@@ -1,10 +1,21 @@
+import { addDoc, collection } from "firebase/firestore";
 import React, { useState } from "react";
+import { dbService } from "../firebase";
+
 const TimetablePage = () => {
   const [startTime, setStartTime] = useState(6);
   const [endTime, setEndTime] = useState(22);
   const [workoutPart, setWorkoutPart] = useState([1, 1, 1, 1, 1]);
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
+    try {
+      await addDoc(collection(dbService, "arm"), {
+        startTime,
+        endTime
+      });
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
     console.log(startTime, endTime);
     console.log(workoutPart);
   };
