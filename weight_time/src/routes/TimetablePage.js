@@ -1,4 +1,7 @@
+import { addDoc, collection } from "firebase/firestore";
 import React, { useState } from "react";
+import { dbService } from "../firebase";
+
 const TimetablePage = () => {
   const [day, setDay] = useState("월요일");
   const [startTime, setStartTime] = useState(6);
@@ -6,6 +9,14 @@ const TimetablePage = () => {
   const [workoutPart, setWorkoutPart] = useState([0, 0, 0, 0, 0]);
   const onSubmit = (event) => {
     event.preventDefault();
+    try {
+      addDoc(collection(dbService, "arm"), {
+        startTime,
+        endTime
+      });
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
     console.log(startTime, endTime);
     console.log(workoutPart);
   };
