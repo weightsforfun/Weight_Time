@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 const TimetablePage = () => {
+  const [day, setDay] = useState("월요일");
   const [startTime, setStartTime] = useState(6);
   const [endTime, setEndTime] = useState(22);
   const [workoutPart, setWorkoutPart] = useState([1, 1, 1, 1, 1]);
@@ -8,7 +9,12 @@ const TimetablePage = () => {
     console.log(startTime, endTime);
     console.log(workoutPart);
   };
-
+  const onChangeDay = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setDay(value);
+  };
   const onChangeStartTime = (event) => {
     const {
       target: { value },
@@ -38,6 +44,15 @@ const TimetablePage = () => {
     <div className="TimetablePage">
       <h1>Timetable</h1>
       <form onSubmit={onSubmit}>
+        <select name="요일" onChange={onChangeDay}>
+          <option value={"월요일"}>월요일</option>
+          <option value={"화요일"}>화요일</option>
+          <option value={"수요일"}>수요일</option>
+          <option value={"목요일"}>목요일</option>
+          <option value={"금요일"}>금요일</option>
+          <option value={"토요일"}>토요일</option>
+          <option value={"일요일"}>일요일</option>
+        </select>
         <label for="startTime">start time</label>
         <input
           type="number"
