@@ -27,7 +27,7 @@ const TimetablePage = () => {
     } = event;
     setEndTime(value);
   };
-  const onChangePart = (event) => {
+  const onChangePartForSubmit = (event) => {
     const {
       target: { id },
     } = event;
@@ -42,6 +42,7 @@ const TimetablePage = () => {
       setWorkoutPart(workoutPart);
     }
   };
+  const onChangePartToSeeTable = (event) => {};
   return (
     <div className="TimetablePage">
       <h1>Timetable</h1>
@@ -79,42 +80,81 @@ const TimetablePage = () => {
             type="checkbox"
             value="등"
             id="1"
-            onChange={onChangePart}
+            onChange={onChangePartForSubmit}
           ></input>
           <label for="2">chest</label>
           <input
             type="checkbox"
             value="가슴"
             id="2"
-            onChange={onChangePart}
+            onChange={onChangePartForSubmit}
           ></input>
           <label for="3">arm</label>
           <input
             type="checkbox"
             value="팔"
             id="3"
-            onChange={onChangePart}
+            onChange={onChangePartForSubmit}
           ></input>
           <label for="4">shoulder</label>
           <input
             type="checkbox"
             value="어깨"
             id="4"
-            onChange={onChangePart}
+            onChange={onChangePartForSubmit}
           ></input>
           <label for="5">leg</label>
           <input
             type="checkbox"
             value="하체"
             id="5"
-            onChange={onChangePart}
+            onChange={onChangePartForSubmit}
           ></input>
           <button type="submit" onSubmit={onSubmit}>
             제출
           </button>
         </form>
       </div>
-      <div className="selectTableBox"></div>
+      <div className="selectTableBox">
+        <form>
+          <label for="1">back</label>
+          <input
+            type="checkbox"
+            value="등"
+            id="1"
+            onChange={onChangePartForSubmit}
+          ></input>
+          <label for="2">chest</label>
+          <input
+            type="checkbox"
+            value="가슴"
+            id="2"
+            onChange={onChangePartForSubmit}
+          ></input>
+          <label for="3">arm</label>
+          <input
+            type="checkbox"
+            value="팔"
+            id="3"
+            onChange={onChangePartForSubmit}
+          ></input>
+          <label for="4">shoulder</label>
+          <input
+            type="checkbox"
+            value="어깨"
+            id="4"
+            onChange={onChangePartForSubmit}
+          ></input>
+          <label for="5">leg</label>
+          <input
+            type="checkbox"
+            value="하체"
+            id="5"
+            onChange={onChangePartForSubmit}
+          ></input>
+          <button>시간표보기</button>
+        </form>
+      </div>
     </div>
   );
 };
