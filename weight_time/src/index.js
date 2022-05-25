@@ -4,6 +4,8 @@ import App from "./components/App";
 import { Component } from "react";
 import moment from "moment";
 import Timetable from "react-timetable-events";
+import './style.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 class Appi extends Component {
   monday_arr = [

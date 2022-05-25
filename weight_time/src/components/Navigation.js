@@ -4,19 +4,17 @@ import { auth } from "../firebase";
 const Navigation = ({ isLoggedIn }) => {
   const onLogOutClick = () => auth.signOut();
   return (
-    <ul>
-      <li>
-        <Link to={"/"}>홈</Link>
-      </li>
-      <li>
+    <div class="nav1">
+
+      <a class="top_c">
         <Link to={"/Partner"}>파트너</Link>
-      </li>
-      <li>
-        <Link to={"/TimetablePage"}>시간표</Link>
-      </li>
-      <li>
+      </a>
+      <a class="top_c">
+        <Link to={"/Timetable"}>시간표</Link>
+      </a>
+      <a class="top_c">
         <Link to={"/Trainer"}>트레이너</Link>
-      </li>
+      </a>
       {isLoggedIn ? (
         <li>
           <Link to={"/"} onClick={onLogOutClick}>
@@ -24,13 +22,13 @@ const Navigation = ({ isLoggedIn }) => {
           </Link>
         </li>
       ) : (
-        <>
-          <li>
-            <Link to={"/Auth"}>로그인</Link>
-          </li>
-        </>
+
+        <li>
+          <Link to={"/Auth"}>로그인</Link>
+        </li>
+
       )}
-    </ul>
+    </div>
   );
 };
 
