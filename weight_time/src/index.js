@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App";
 import { Component } from "react";
-import { render } from "react-dom";
 import moment from "moment";
 import Timetable from "react-timetable-events";
 import './style.css';
