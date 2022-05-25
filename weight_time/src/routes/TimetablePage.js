@@ -7,10 +7,11 @@ const TimetablePage = () => {
   const [startTime, setStartTime] = useState(6);
   const [endTime, setEndTime] = useState(22);
   const [workoutPart, setWorkoutPart] = useState([0, 0, 0, 0, 0]);
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      addDoc(collection(dbService, "arm"), {
+      await addDoc(collection(dbService, "arm"), {
+        day,
         startTime,
         endTime
       });
