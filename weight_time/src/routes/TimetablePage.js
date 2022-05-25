@@ -25,9 +25,7 @@ const TimetablePage = () => {
     }
     console.log(startTime, endTime);
     console.log(workoutPart);
-    for (var i = 0; i < 5; i++) {
-      workoutPart[i] = 0;
-    }
+
     setWorkoutPart(workoutPart);
   };
   const onChangeDay = (event) => {
@@ -58,9 +56,11 @@ const TimetablePage = () => {
     if (checked) {
       workoutPart[id] = 1;
       setWorkoutPart(workoutPart);
-    } else if (!checked && workoutPart[id] === 1) {
-      setWorkoutPart[id] = 0;
+      console.log(workoutPart);
+    } else {
+      workoutPart[id] = 0;
       setWorkoutPart(workoutPart);
+      console.log(workoutPart);
     }
   };
   const onChangePartToSeeTable = (event) => {};
@@ -78,7 +78,7 @@ const TimetablePage = () => {
             <option value={"토요일"}>토요일</option>
             <option value={"일요일"}>일요일</option>
           </select>
-          <label for="startTime">start time</label>
+          <label htmlFor="startTime">start time</label>
           <input
             type="number"
             min="6"
@@ -87,7 +87,7 @@ const TimetablePage = () => {
             id="startTime"
             onChange={onChangeStartTime}
           ></input>
-          <label for="endTime">end time</label>
+          <label htmlFor="endTime">end time</label>
           <input
             type="number"
             min="6"
@@ -96,39 +96,39 @@ const TimetablePage = () => {
             id="endTime"
             onChange={onChangeEndTime}
           ></input>
-          <label for="1">back</label>
+          <label htmlFor="0">back</label>
           <input
             type="checkbox"
             value="등"
-            id="1"
+            id="0"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="2">chest</label>
+          <label htmlFor="1">chest</label>
           <input
             type="checkbox"
             value="가슴"
-            id="2"
+            id="1"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="3">arm</label>
+          <label htmlFor="2">arm</label>
           <input
             type="checkbox"
             value="팔"
-            id="3"
+            id="2"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="4">shoulder</label>
+          <label htmlFor="3">shoulder</label>
           <input
             type="checkbox"
             value="어깨"
-            id="4"
+            id="3"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="5">leg</label>
+          <label htmlFor="4">leg</label>
           <input
             type="checkbox"
             value="하체"
-            id="5"
+            id="4"
             onChange={onChangePartForSubmit}
           ></input>
           <button type="submit" onSubmit={onSubmit}>
@@ -138,35 +138,35 @@ const TimetablePage = () => {
       </div>
       <div className="selectTableBox">
         <form>
-          <label for="0">back</label>
+          <label htmlFor="0">back</label>
           <input
             type="checkbox"
             value="등"
             id="0"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="1">chest</label>
+          <label htmlFor="1">chest</label>
           <input
             type="checkbox"
             value="가슴"
             id="1"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="2">arm</label>
+          <label htmlFor="2">arm</label>
           <input
             type="checkbox"
             value="팔"
             id="2"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="3">shoulder</label>
+          <label htmlFor="3">shoulder</label>
           <input
             type="checkbox"
             value="어깨"
             id="3"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="4">leg</label>
+          <label htmlFor="4">leg</label>
           <input
             type="checkbox"
             value="하체"
