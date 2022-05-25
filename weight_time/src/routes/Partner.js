@@ -2,8 +2,8 @@ import React from "react";
 
 const Partner = () => {
     return (
-        <div class="main_dis">
-            <span class="mar_auto">Partner</span>
+        <div className="main_dis">
+            <span className="mar_auto">Partner</span>
         </div>
     );
 };
