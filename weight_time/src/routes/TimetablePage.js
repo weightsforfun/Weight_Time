@@ -6,20 +6,27 @@ const TimetablePage = () => {
   const [day, setDay] = useState("월요일");
   const [startTime, setStartTime] = useState(6);
   const [endTime, setEndTime] = useState(22);
-  const [workoutPart, setWorkoutPart] = useState([0, 0, 0, 0, 0]);
-  const onSubmit = async (event) => {
+  const [workoutPart, setWorkoutPart] = useState([0, 0, 0, 0, 0]); //등 가슴 팔 어깨 하체
+  const onSubmit = (event) => {
+    const partIndex = ["back", "chest", "arm", "shoulder", "leg"];
     event.preventDefault();
-    try {
-      await addDoc(collection(dbService, "arm"), {
-        day,
-        startTime,
-        endTime
-      });
-    } catch (error) {
-      console.error("Error adding document: ", error);
+    for (var i = 0; i < 5; i++) {
+      if (workoutPart[i] === 1) {
+        try {
+          addDoc(collection(dbService, partIndex[i]), {
+            startTime,
+            endTime,
+            day,
+          });
+        } catch (error) {
+          console.error("Error adding document: ", error);
+        }
+      }
     }
     console.log(startTime, endTime);
     console.log(workoutPart);
+
+    setWorkoutPart(workoutPart);
   };
   const onChangeDay = (event) => {
     const {
@@ -49,9 +56,11 @@ const TimetablePage = () => {
     if (checked) {
       workoutPart[id] = 1;
       setWorkoutPart(workoutPart);
-    } else if (!checked && workoutPart[id] === 1) {
-      setWorkoutPart[id] = 0;
+      console.log(workoutPart);
+    } else {
+      workoutPart[id] = 0;
       setWorkoutPart(workoutPart);
+      console.log(workoutPart);
     }
   };
   const onChangePartToSeeTable = (event) => {};
@@ -69,7 +78,7 @@ const TimetablePage = () => {
             <option value={"토요일"}>토요일</option>
             <option value={"일요일"}>일요일</option>
           </select>
-          <label for="startTime">start time</label>
+          <label htmlFor="startTime">start time</label>
           <input
             type="number"
             min="6"
@@ -78,7 +87,7 @@ const TimetablePage = () => {
             id="startTime"
             onChange={onChangeStartTime}
           ></input>
-          <label for="endTime">end time</label>
+          <label htmlFor="endTime">end time</label>
           <input
             type="number"
             min="6"
@@ -87,39 +96,39 @@ const TimetablePage = () => {
             id="endTime"
             onChange={onChangeEndTime}
           ></input>
-          <label for="1">back</label>
+          <label htmlFor="0">back</label>
           <input
             type="checkbox"
             value="등"
-            id="1"
+            id="0"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="2">chest</label>
+          <label htmlFor="1">chest</label>
           <input
             type="checkbox"
             value="가슴"
-            id="2"
+            id="1"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="3">arm</label>
+          <label htmlFor="2">arm</label>
           <input
             type="checkbox"
             value="팔"
-            id="3"
+            id="2"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="4">shoulder</label>
+          <label htmlFor="3">shoulder</label>
           <input
             type="checkbox"
             value="어깨"
-            id="4"
+            id="3"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="5">leg</label>
+          <label htmlFor="4">leg</label>
           <input
             type="checkbox"
             value="하체"
-            id="5"
+            id="4"
             onChange={onChangePartForSubmit}
           ></input>
           <button type="submit" onSubmit={onSubmit}>
@@ -129,39 +138,39 @@ const TimetablePage = () => {
       </div>
       <div className="selectTableBox">
         <form>
-          <label for="1">back</label>
+          <label htmlFor="0">back</label>
           <input
             type="checkbox"
             value="등"
-            id="1"
+            id="0"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="2">chest</label>
+          <label htmlFor="1">chest</label>
           <input
             type="checkbox"
             value="가슴"
-            id="2"
+            id="1"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="3">arm</label>
+          <label htmlFor="2">arm</label>
           <input
             type="checkbox"
             value="팔"
-            id="3"
+            id="2"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="4">shoulder</label>
+          <label htmlFor="3">shoulder</label>
           <input
             type="checkbox"
             value="어깨"
-            id="4"
+            id="3"
             onChange={onChangePartForSubmit}
           ></input>
-          <label for="5">leg</label>
+          <label htmlFor="4">leg</label>
           <input
             type="checkbox"
             value="하체"
-            id="5"
+            id="4"
             onChange={onChangePartForSubmit}
           ></input>
           <button>시간표보기</button>
