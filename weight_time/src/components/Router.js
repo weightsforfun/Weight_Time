@@ -7,11 +7,11 @@ import Trainer from "../routes/Trainer";
 import Auth from "../routes/Auth";
 import { Navigate } from "react-router-dom";
 import Navigation from "./Navigation";
+import Appi from "./Timetable";
 
 const AppRouter = ({ isLoggedIn }) => {
   return (
     <Router>
-      <Navigation isLoggedIn={isLoggedIn} />
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
         <Route
@@ -19,7 +19,12 @@ const AppRouter = ({ isLoggedIn }) => {
           element={isLoggedIn ? <Navigate to="/" replace /> : <Auth />}
         />
         <Route path="/Partner" element={<Partner />} />
-        <Route path="/TimetablePage" element={<TimetablePage />} />
+        <Route path="/TimetablePage" element={
+        <>
+        <TimetablePage />
+        <Appi />
+        </>
+        } />
         <Route path="/Trainer" element={<Trainer />} />
       </Routes>
     </Router>

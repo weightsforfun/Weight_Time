@@ -63,7 +63,8 @@ const TimetablePage = () => {
       console.log(workoutPart);
     }
   };
-  const onChangePartToSeeTable = (event) => {};
+  const onChangePartToSeeTable = async (event) => {
+  };
   return (
     <div className="TimetablePage">
       <h1>Timetable</h1>
