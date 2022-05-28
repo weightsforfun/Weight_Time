@@ -1,5 +1,5 @@
 import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { dbService } from "../firebase";
 import Appi from "../components/Timetable";
 import moment from "moment";
@@ -11,7 +11,14 @@ const TimetablePage = () => {
   const [workoutPart, setWorkoutPart] = useState([0, 0, 0, 0, 0]); //등 가슴 팔 어깨 하체
   const [workoutPartToSee, setWorkoutPartToSee] = useState([0, 0, 0, 0, 0]);
   const [times, setTimes] = useState([]);
-  const [test, setTest] = useState({ part: "가슴" });
+  const [test, setTest] = useState([
+    {
+      id: "fsdlkfnsdjklfbsdjkfbksbf",
+      name: "가슴",
+      startTime: moment("2018-02-23T11:30:00"),
+      endTime: moment("2018-02-23T13:30:00"),
+    },
+  ]);
   const partIndex = ["back", "chest", "arm", "shoulder", "leg"];
   const onSubmit = (event) => {
     event.preventDefault();
@@ -100,7 +107,6 @@ const TimetablePage = () => {
             };
           });
           setTimes(timeArray);
-          console.log(timeArray);
 
           //timeArrays는 잘받아와지는데 setTimes가 비동기적으로 작동해서 times를 바로 못받아와
           //setTimes내에 함수로 선언하면 동기적으로 작동해야되는데 왜 안되는걸까...
@@ -112,7 +118,11 @@ const TimetablePage = () => {
     const {
       target: { value },
     } = event;
-    setTest;
+    setTest({
+      ...test,
+      name: value,
+    });
+    console.log(test.name);
   };
   return (
     <div className="TimetablePage">
@@ -226,17 +236,10 @@ const TimetablePage = () => {
           <button onSubmit={onSubmitToSee}>시간표보기</button>
         </form>
       </div>
+
       <input onChange={onChangeTest}></input>
-      <Appi
-        test={[
-          {
-            id: "fsdlkfnsdjklfbsdjkfbksbf",
-            name: test.part,
-            startTime: moment("2018-02-23T11:30:00"),
-            endTime: moment("2018-02-23T13:30:00"),
-          },
-        ]}
-      />
+      <h1>{test.name}</h1>
+      <Appi propTest={test} />
     </div>
   );
 };

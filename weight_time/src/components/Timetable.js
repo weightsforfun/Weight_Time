@@ -1,5 +1,4 @@
 import { Component } from "react";
-import moment from "moment";
 import Timetable from "react-timetable-events";
 
 class Appi extends Component {
@@ -8,8 +7,8 @@ class Appi extends Component {
     this.state = {
       timetableProps: {
         events: {
-          monday: this.props.test,
-          tuesday: this.props.test,
+          monday: this.props.propTest,
+          tuesday: this.props.propTest,
           wednesday: [],
           thursday: [],
           friday: [],
@@ -56,7 +55,23 @@ class Appi extends Component {
   }
 
   render() {
-    return <Timetable {...this.state.timetableProps} />;
+    console.log("re-rendered");
+    return (
+      <div>
+        <button
+          onClick={() => {
+            this.state.timetableProps.renderHour(
+              this.event,
+              this.defaultAttributes,
+              this.defaultAttributes.style
+            );
+          }}
+        >
+          새로고침
+        </button>
+        <Timetable {...this.state.timetableProps} />
+      </div>
+    );
   }
 }
 
