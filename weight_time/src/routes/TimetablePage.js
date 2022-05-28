@@ -1,6 +1,8 @@
 import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
 import React, { useState } from "react";
 import { dbService } from "../firebase";
+import Appi from "../components/Timetable";
+import moment from "moment";
 
 const TimetablePage = () => {
   const [day, setDay] = useState("월요일");
@@ -9,6 +11,7 @@ const TimetablePage = () => {
   const [workoutPart, setWorkoutPart] = useState([0, 0, 0, 0, 0]); //등 가슴 팔 어깨 하체
   const [workoutPartToSee, setWorkoutPartToSee] = useState([0, 0, 0, 0, 0]);
   const [times, setTimes] = useState([]);
+  const [test, setTest] = useState({ part: "가슴" });
   const partIndex = ["back", "chest", "arm", "shoulder", "leg"];
   const onSubmit = (event) => {
     event.preventDefault();
@@ -74,11 +77,11 @@ const TimetablePage = () => {
       target: { checked },
     } = event;
     if (checked) {
-      workoutPartToSee[id] = 1;
+      workoutPartToSee[id - 5] = 1;
       setWorkoutPartToSee(workoutPartToSee);
       console.log(workoutPartToSee);
     } else {
-      workoutPartToSee[id] = 0;
+      workoutPartToSee[id - 5] = 0;
       setWorkoutPartToSee(workoutPartToSee);
       console.log(workoutPartToSee);
     }
@@ -88,25 +91,29 @@ const TimetablePage = () => {
     event.preventDefault();
     for (var i = 0; i < 5; i++) {
       if (workoutPartToSee[i] === 1) {
-          const qr = query(collection(dbService, partIndex[i]));
-          onSnapshot(qr, (snapshot) => {
-            const timeArray = snapshot.docs.map((doc) => ({
+        const qr = query(collection(dbService, partIndex[i]));
+        onSnapshot(qr, (snapshot) => {
+          const timeArray = snapshot.docs.map((doc) => {
+            return {
               id: doc.id,
               ...doc.data(),
-            }));
-          setTimes(() => {
-            return timeArray;
+            };
           });
-          console.log(timeArray);          
-          console.log(times);
+          setTimes(timeArray);
+          console.log(timeArray);
+
           //timeArrays는 잘받아와지는데 setTimes가 비동기적으로 작동해서 times를 바로 못받아와
           //setTimes내에 함수로 선언하면 동기적으로 작동해야되는데 왜 안되는걸까...
-          }
-        );
-      };
+        });
+      }
     }
-  }
-
+  };
+  const onChangeTest = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setTest;
+  };
   return (
     <div className="TimetablePage">
       <h1>Timetable</h1>
@@ -181,44 +188,55 @@ const TimetablePage = () => {
       </div>
       <div className="selectTableBox">
         <form onSubmit={onSubmitToSee}>
-          <label htmlFor="0">back</label>
+          <label htmlFor="5">back</label>
           <input
             type="checkbox"
             value="등"
-            id="0"
+            id="5"
             onChange={onChangePartToSeeTable}
           ></input>
-          <label htmlFor="1">chest</label>
+          <label htmlFor="6">chest</label>
           <input
             type="checkbox"
             value="가슴"
-            id="1"
+            id="6"
             onChange={onChangePartToSeeTable}
           ></input>
-          <label htmlFor="2">arm</label>
+          <label htmlFor="7">arm</label>
           <input
             type="checkbox"
             value="팔"
-            id="2"
+            id="7"
             onChange={onChangePartToSeeTable}
           ></input>
-          <label htmlFor="3">shoulder</label>
+          <label htmlFor="8">shoulder</label>
           <input
             type="checkbox"
             value="어깨"
-            id="3"
+            id="8"
             onChange={onChangePartToSeeTable}
           ></input>
-          <label htmlFor="4">leg</label>
+          <label htmlFor="9">leg</label>
           <input
             type="checkbox"
             value="하체"
-            id="4"
+            id="9"
             onChange={onChangePartToSeeTable}
           ></input>
           <button onSubmit={onSubmitToSee}>시간표보기</button>
         </form>
       </div>
+      <input onChange={onChangeTest}></input>
+      <Appi
+        test={[
+          {
+            id: "fsdlkfnsdjklfbsdjkfbksbf",
+            name: test.part,
+            startTime: moment("2018-02-23T11:30:00"),
+            endTime: moment("2018-02-23T13:30:00"),
+          },
+        ]}
+      />
     </div>
   );
 };

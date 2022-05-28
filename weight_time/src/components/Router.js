@@ -18,12 +18,14 @@ const AppRouter = ({ isLoggedIn }) => {
           element={isLoggedIn ? <Navigate to="/" replace /> : <Auth />}
         />
         <Route path="/Partner" element={<Partner />} />
-        <Route path="/TimetablePage" element={
-        <>
-        <TimetablePage />
-        <Appi />
-        </>
-        } />
+        <Route
+          path="/TimetablePage"
+          element={
+            <>
+              <TimetablePage />
+            </>
+          }
+        />
         <Route path="/Trainer" element={<Trainer />} />
       </Routes>
     </Router>
