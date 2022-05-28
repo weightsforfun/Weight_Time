@@ -1,5 +1,5 @@
 import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { dbService } from "../firebase";
 import Appi from "../components/Timetable";
 import moment from "moment";
@@ -19,7 +19,34 @@ const TimetablePage = () => {
       endTime: moment("2018-02-23T13:30:00"),
     },
   ]);
+  const dayIndex = [
+    "월요일",
+    "화요일",
+    "수요일",
+    "목요일",
+    "금요일",
+    "토요일",
+    "일요일",
+  ];
   const partIndex = ["back", "chest", "arm", "shoulder", "leg"];
+  let week = [{}, {}, {}, {}, {}, {}, {}];
+
+  const categorizedByTime = (arr) => {
+    for (var i = 0; i < 7; i++) {
+      for (var j = 0; j < arr.length; j++) {
+        if (arr[j].day === dayIndex[i]) {
+          for (var v = arr[j].startTime; v < arr[j].endTime; v++) {
+            if (String(v) in week[i]) {
+              week[i][String(v)] = week[i][String(v)] + 1;
+            } else {
+              week[i][String(v)] = 1;
+            }
+          }
+        }
+      }
+    }
+  };
+
   const onSubmit = (event) => {
     event.preventDefault();
     for (var i = 0; i < 5; i++) {
@@ -106,8 +133,10 @@ const TimetablePage = () => {
               ...doc.data(),
             };
           });
+          categorizedByTime(timeArray);
           setTimes(timeArray);
-
+          console.log(timeArray);
+          console.log(week);
           //timeArrays는 잘받아와지는데 setTimes가 비동기적으로 작동해서 times를 바로 못받아와
           //setTimes내에 함수로 선언하면 동기적으로 작동해야되는데 왜 안되는걸까...
         });
