@@ -1,11 +1,12 @@
 import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { dbService } from "../firebase";
 import Appi from "../components/Timetable";
 import moment from "moment";
 import TestPageForTimeTable from "./TestPageForTimeTable";
+import Navigation from "../components/Navigation";
 
-const TimetablePage = () => {
+const TimetablePage = ({isLoggedIn}) => {
   const [day, setDay] = useState("월요일");
   const [startTime, setStartTime] = useState(6);
   const [endTime, setEndTime] = useState(22);
@@ -13,14 +14,22 @@ const TimetablePage = () => {
   const [workoutPartToSee, setWorkoutPartToSee] = useState([0, 0, 0, 0, 0]);
   const [times, setTimes] = useState([]);
   const [wantTable, setWantTable] = useState(false);
-  const [test, setTest] = useState([
-    {
-      id: "fsdlkfnsdjklfbsdjkfbksbf",
-      name: "가슴",
-      startTime: moment("2018-02-23T11:30:00"),
-      endTime: moment("2018-02-23T13:30:00"),
-    },
-  ]);
+  const [week, setWeek] = useState([[], [], [], [], [], [], []]);
+  // const [test, setTest] = useState([
+  //   {
+  //     time: 4,
+  //     name: 19,
+  //     startTime: moment("2022-05-29T07:00:00"),
+  //     endTime: moment("2022-05-29T08:00:00"),
+  //   },
+  //   {
+  //     time: 4,
+  //   name: 19,
+  //   startTime: moment("2022-05-29T09:00:00"),
+  //   endTime: moment("2022-05-29T11:00:00"),
+  //   },
+  // ]);
+
   const dayIndex = [
     "월요일",
     "화요일",
@@ -31,22 +40,47 @@ const TimetablePage = () => {
     "일요일",
   ];
   const partIndex = ["back", "chest", "arm", "shoulder", "leg"];
-  let week = [{}, {}, {}, {}, {}, {}, {}];
 
   const categorizedByTime = (arr) => {
     for (var i = 0; i < 7; i++) {
       for (var j = 0; j < arr.length; j++) {
         if (arr[j].day === dayIndex[i]) {
           for (var v = arr[j].startTime; v < arr[j].endTime; v++) {
-            if (String(v) in week[i]) {
-              week[i][String(v)] = week[i][String(v)] + 1;
-            } else {
-              week[i][String(v)] = 1;
+            var judge = false;
+            for (var q = 0; q < week[i].length; q++){
+              if(v === week[i][q]['time']){
+                week[i][q]['name'] = week[i][q]['name'] + 1;
+                judge = true;
+                break;
+              }
+            }
+            if (!judge){
+              week[i] = [...week[i], 
+              {
+                time: v,
+                name: 1,
+                startTime: moment("2022-05-29T" + ('0' + v).slice(-2) + ":00:00"),
+                endTime: moment("2022-05-29T" + ('0' + String(Number(v)+1)).slice(-2) + ":00:00"),
+              }];
             }
           }
         }
       }
     }
+    // for (var p = 0; p < 7; p++) {
+    //   for(var item in week[p]){
+    //     week[p][item]['startTime'] = moment("2022-05-29T" + ('0' + item).slice(-2) + ":00:00");
+    //     week[p][item]['endTime'] = moment("2022-05-29T" + ('0' + String(Number(item)+1)).slice(-2) + ":00:00");
+    //   }
+    // }
+      // week[p][6].map((key) => (
+      //   {
+      //     ...item[key],
+      //     startTime: '5464'
+      //     // startTime: moment("2022-05-29T" + ('0' + String(index)).slice(-2) + ":00:00"),
+      //     // endTime: moment("2022-05-29T" + ('0' + String(index+1)).slice(-2) + ":00:00"),
+      //   }
+      // ))
   };
 
   const onSubmit = (event) => {
@@ -146,22 +180,11 @@ const TimetablePage = () => {
   };
   const onSubmitToChange = (event) => {
     event.preventDefault();
+    setWeek([[], [], [], [], [], [], []]);
     setWantTable(false);
   };
-  const onChangeTest = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setTest([
-      {
-        id: "1",
-        name: `${value}`,
-        startTime: moment("2018-02-23T11:30:00"),
-        endTime: moment("2018-02-23T13:30:00"),
-      },
-    ]);
-  };
   return (
+    <>
     <div className="TimetablePage">
       <h1>Timetable</h1>
       <div className="submitBox">
@@ -279,23 +302,26 @@ const TimetablePage = () => {
           </>
         </form>
       </div>
-      <input onChange={onChangeTest}></input>
       <>
         {wantTable ? (
           <Appi
-            monday={test} //이제 여기에 구조체 들어가있는 배열
-            tuesday={test} //넣어주면 됌 [{},{},{}] 이런식
-            wednesday={test}
-            thursday={test}
-            friday={test}
-            saturday={test}
-            sunday={test}
+            monday={week[0]} //이제 여기에 구조체 들어가있는 배열
+            tuesday={week[1]} //넣어주면 됌 [{},{},{}] 이런식
+            wednesday={week[2]}
+            thursday={week[3]}
+            friday={week[4]}
+            saturday={week[5]}
+            sunday={week[6]}
           />
         ) : (
           <TestPageForTimeTable />
         )}
       </>
     </div>
+    <div className="m_nav">
+      <Navigation isLoggedIn={isLoggedIn} />
+    </div>
+    </>
   );
 };
 export default TimetablePage;

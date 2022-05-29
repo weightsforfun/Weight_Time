@@ -5,7 +5,8 @@ import {
     GoogleAuthProvider,
     signInWithPopup
     } from "firebase/auth";
-const Auth = () => {
+import Navigation from "../components/Navigation";
+const Auth = ({isLoggedIn}) => {
     const onSocialClick = async (event) => {
         const {target: { name }} = event;
         let provider;
@@ -19,10 +20,15 @@ const Auth = () => {
     };
     
     return(
+            <>
             <div>
                 <button name="google" onClick={onSocialClick}>Continue with Google</button>
                 <button name="facebook" onClick={onSocialClick}>Continue with FaceBook</button>
             </div>
+            <div className="m_nav">
+                <Navigation isLoggedIn={isLoggedIn} />
+            </div>
+            </>
     )
 }
 

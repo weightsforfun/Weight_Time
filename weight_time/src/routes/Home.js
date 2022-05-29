@@ -9,7 +9,7 @@ const Home = ({ isLoggedIn }) => {
     <div className="main_dis">
       <div className="logo_div">
         <img className="logo" src="img/logo_w.png" />
-        <button type="button" className="log_in">로그인</button>
+        <button type="button" className="log_in"><Link to={"/Auth"}>로그인</Link></button>
       </div>
 
 
