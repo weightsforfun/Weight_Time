@@ -6,7 +6,6 @@ import TimetablePage from "../routes/TimetablePage";
 import Trainer from "../routes/Trainer";
 import Auth from "../routes/Auth";
 import { Navigate } from "react-router-dom";
-import Appi from "./Timetable";
 
 const AppRouter = ({ isLoggedIn }) => {
   return (

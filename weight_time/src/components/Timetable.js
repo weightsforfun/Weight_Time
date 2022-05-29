@@ -7,11 +7,13 @@ class Appi extends Component {
     this.state = {
       timetableProps: {
         events: {
-          monday: this.props.propTest,
-          tuesday: this.props.propTest,
-          wednesday: [],
-          thursday: [],
-          friday: [],
+          monday: this.props.monday,
+          tuesday: this.props.tuesday,
+          wednesday: this.props.wednesday,
+          thursday: this.props.thursday,
+          friday: this.props.friday,
+          saturday: this.props.saturday,
+          sunday: this.props.sunday,
         },
         hoursInterval: [1, 24],
         timeLabel: "Time :)",
@@ -32,21 +34,23 @@ class Appi extends Component {
         },
         renderEvent(event, defaultAttributes, styles) {
           return (
-            <div
-              {...defaultAttributes}
-              title={event.name}
-              key={event.id}
-              style={{
-                ...defaultAttributes.style,
-                background: "#000",
-                borderRadius: "50px",
-              }}
-            >
-              <span className={styles.event_info}>[ {event.name} ]</span>
-              <span className={styles.event_info}>
-                {event.startTime.format("HH:mm")} -{" "}
-                {event.endTime.format("HH:mm")}
-              </span>
+            <div>
+              <div
+                {...defaultAttributes}
+                title={event.name}
+                key={event.id}
+                style={{
+                  ...defaultAttributes.style,
+                  background: "#000",
+                  borderRadius: "50px",
+                }}
+              >
+                <span className={styles.event_info}>[ {event.name} ]</span>
+                <span className={styles.event_info}>
+                  {event.startTime.format("HH:mm")} -{" "}
+                  {event.endTime.format("HH:mm")}
+                </span>
+              </div>
             </div>
           );
         },
@@ -55,23 +59,7 @@ class Appi extends Component {
   }
 
   render() {
-    console.log("re-rendered");
-    return (
-      <div>
-        <button
-          onClick={() => {
-            this.state.timetableProps.renderHour(
-              this.event,
-              this.defaultAttributes,
-              this.defaultAttributes.style
-            );
-          }}
-        >
-          새로고침
-        </button>
-        <Timetable {...this.state.timetableProps} />
-      </div>
-    );
+    return <Timetable {...this.state.timetableProps} />;
   }
 }
 

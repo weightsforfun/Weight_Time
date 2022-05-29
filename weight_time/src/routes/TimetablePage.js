@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { dbService } from "../firebase";
 import Appi from "../components/Timetable";
 import moment from "moment";
+import TestPageForTimeTable from "./TestPageForTimeTable";
 
 const TimetablePage = () => {
   const [day, setDay] = useState("월요일");
@@ -11,6 +12,7 @@ const TimetablePage = () => {
   const [workoutPart, setWorkoutPart] = useState([0, 0, 0, 0, 0]); //등 가슴 팔 어깨 하체
   const [workoutPartToSee, setWorkoutPartToSee] = useState([0, 0, 0, 0, 0]);
   const [times, setTimes] = useState([]);
+  const [wantTable, setWantTable] = useState(false);
   const [test, setTest] = useState([
     {
       id: "fsdlkfnsdjklfbsdjkfbksbf",
@@ -135,23 +137,29 @@ const TimetablePage = () => {
           });
           categorizedByTime(timeArray);
           setTimes(timeArray);
+          setWantTable(true);
           console.log(timeArray);
           console.log(week);
-          //timeArrays는 잘받아와지는데 setTimes가 비동기적으로 작동해서 times를 바로 못받아와
-          //setTimes내에 함수로 선언하면 동기적으로 작동해야되는데 왜 안되는걸까...
         });
       }
     }
+  };
+  const onSubmitToChange = (event) => {
+    event.preventDefault();
+    setWantTable(false);
   };
   const onChangeTest = (event) => {
     const {
       target: { value },
     } = event;
-    setTest({
-      ...test,
-      name: value,
-    });
-    console.log(test.name);
+    setTest([
+      {
+        id: "1",
+        name: `${value}`,
+        startTime: moment("2018-02-23T11:30:00"),
+        endTime: moment("2018-02-23T13:30:00"),
+      },
+    ]);
   };
   return (
     <div className="TimetablePage">
@@ -262,13 +270,31 @@ const TimetablePage = () => {
             id="9"
             onChange={onChangePartToSeeTable}
           ></input>
-          <button onSubmit={onSubmitToSee}>시간표보기</button>
+          <>
+            {wantTable ? ( //이거 true false로 renderingw= 계속 조져주는거임 근데 onsubmitTochange는
+              <button onClick={onSubmitToChange}>시간표다시선택</button> // 버튼에서 onsubmit아니고 onclick으로 해놓음 바로 바뀔수있게
+            ) : (
+              <button onSubmit={onSubmitToSee}>시간표보기</button>
+            )}
+          </>
         </form>
       </div>
-
       <input onChange={onChangeTest}></input>
-      <h1>{test.name}</h1>
-      <Appi propTest={test} />
+      <>
+        {wantTable ? (
+          <Appi
+            monday={test} //이제 여기에 구조체 들어가있는 배열
+            tuesday={test} //넣어주면 됌 [{},{},{}] 이런식
+            wednesday={test}
+            thursday={test}
+            friday={test}
+            saturday={test}
+            sunday={test}
+          />
+        ) : (
+          <TestPageForTimeTable />
+        )}
+      </>
     </div>
   );
 };
