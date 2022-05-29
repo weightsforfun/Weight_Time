@@ -15,7 +15,7 @@ class Appi extends Component {
           saturday: this.props.saturday,
           sunday: this.props.sunday,
         },
-        hoursInterval: [1, 24],
+        hoursInterval: [6, 24],
         timeLabel: "Time :)",
         renderHour(hour, defaultAttributes, styles) {
           return (

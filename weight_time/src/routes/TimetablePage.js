@@ -4,23 +4,17 @@ import { dbService } from "../firebase";
 import Appi from "../components/Timetable";
 import moment from "moment";
 import TestPageForTimeTable from "./TestPageForTimeTable";
+import Navigation from "../components/Navigation";
 
-const TimetablePage = () => {
+const TimetablePage = ({ isLoggedIn }) => {
   const [day, setDay] = useState("월요일");
   const [startTime, setStartTime] = useState(6);
   const [endTime, setEndTime] = useState(22);
   const [workoutPart, setWorkoutPart] = useState([0, 0, 0, 0, 0]); //등 가슴 팔 어깨 하체
   const [workoutPartToSee, setWorkoutPartToSee] = useState([0, 0, 0, 0, 0]);
-  const [times, setTimes] = useState([]);
   const [wantTable, setWantTable] = useState(false);
-  const [test, setTest] = useState([
-    {
-      id: "fsdlkfnsdjklfbsdjkfbksbf",
-      name: "가슴",
-      startTime: moment("2018-02-23T11:30:00"),
-      endTime: moment("2018-02-23T13:30:00"),
-    },
-  ]);
+  const [week, setWeek] = useState([[], [], [], [], [], [], []]);
+
   const dayIndex = [
     "월요일",
     "화요일",
@@ -31,17 +25,36 @@ const TimetablePage = () => {
     "일요일",
   ];
   const partIndex = ["back", "chest", "arm", "shoulder", "leg"];
-  let week = [{}, {}, {}, {}, {}, {}, {}];
 
   const categorizedByTime = (arr) => {
     for (var i = 0; i < 7; i++) {
       for (var j = 0; j < arr.length; j++) {
         if (arr[j].day === dayIndex[i]) {
           for (var v = arr[j].startTime; v < arr[j].endTime; v++) {
-            if (String(v) in week[i]) {
-              week[i][String(v)] = week[i][String(v)] + 1;
-            } else {
-              week[i][String(v)] = 1;
+            var judge = false;
+            for (var q = 0; q < week[i].length; q++) {
+              if (v === week[i][q]["time"]) {
+                week[i][q]["name"] = week[i][q]["name"] + 1;
+                judge = true;
+                break;
+              }
+            }
+            if (!judge) {
+              week[i] = [
+                ...week[i],
+                {
+                  time: v,
+                  name: 1,
+                  startTime: moment(
+                    "2022-05-29T" + ("0" + v).slice(-2) + ":00:00"
+                  ),
+                  endTime: moment(
+                    "2022-05-29T" +
+                      ("0" + String(Number(v) + 1)).slice(-2) +
+                      ":00:00"
+                  ),
+                },
+              ];
             }
           }
         }
@@ -136,7 +149,6 @@ const TimetablePage = () => {
             };
           });
           categorizedByTime(timeArray);
-          setTimes(timeArray);
           setWantTable(true);
           console.log(timeArray);
           console.log(week);
@@ -146,156 +158,148 @@ const TimetablePage = () => {
   };
   const onSubmitToChange = (event) => {
     event.preventDefault();
+    setWeek([[], [], [], [], [], [], []]);
     setWantTable(false);
   };
-  const onChangeTest = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setTest([
-      {
-        id: "1",
-        name: `${value}`,
-        startTime: moment("2018-02-23T11:30:00"),
-        endTime: moment("2018-02-23T13:30:00"),
-      },
-    ]);
-  };
   return (
-    <div className="TimetablePage">
-      <h1>Timetable</h1>
-      <div className="submitBox">
-        <form onSubmit={onSubmit}>
-          <select name="요일" onChange={onChangeDay}>
-            <option value={"월요일"}>월요일</option>
-            <option value={"화요일"}>화요일</option>
-            <option value={"수요일"}>수요일</option>
-            <option value={"목요일"}>목요일</option>
-            <option value={"금요일"}>금요일</option>
-            <option value={"토요일"}>토요일</option>
-            <option value={"일요일"}>일요일</option>
-          </select>
-          <label htmlFor="startTime">start time</label>
-          <input
-            type="number"
-            min="6"
-            max="22"
-            value={startTime}
-            id="startTime"
-            onChange={onChangeStartTime}
-          ></input>
-          <label htmlFor="endTime">end time</label>
-          <input
-            type="number"
-            min="6"
-            max="22"
-            value={endTime}
-            id="endTime"
-            onChange={onChangeEndTime}
-          ></input>
-          <label htmlFor="0">back</label>
-          <input
-            type="checkbox"
-            value="등"
-            id="0"
-            onChange={onChangePartForSubmit}
-          ></input>
-          <label htmlFor="1">chest</label>
-          <input
-            type="checkbox"
-            value="가슴"
-            id="1"
-            onChange={onChangePartForSubmit}
-          ></input>
-          <label htmlFor="2">arm</label>
-          <input
-            type="checkbox"
-            value="팔"
-            id="2"
-            onChange={onChangePartForSubmit}
-          ></input>
-          <label htmlFor="3">shoulder</label>
-          <input
-            type="checkbox"
-            value="어깨"
-            id="3"
-            onChange={onChangePartForSubmit}
-          ></input>
-          <label htmlFor="4">leg</label>
-          <input
-            type="checkbox"
-            value="하체"
-            id="4"
-            onChange={onChangePartForSubmit}
-          ></input>
-          <button type="submit" onSubmit={onSubmit}>
-            제출
-          </button>
-        </form>
+    <>
+      <div className="TimetablePage">
+        <h1>Timetable</h1>
+        <div className="submitBox">
+          <form onSubmit={onSubmit}>
+            <select name="요일" onChange={onChangeDay}>
+              <option value={"월요일"}>월요일</option>
+              <option value={"화요일"}>화요일</option>
+              <option value={"수요일"}>수요일</option>
+              <option value={"목요일"}>목요일</option>
+              <option value={"금요일"}>금요일</option>
+              <option value={"토요일"}>토요일</option>
+              <option value={"일요일"}>일요일</option>
+            </select>
+            <label htmlFor="startTime">start time</label>
+            <input
+              type="number"
+              min="6"
+              max="22"
+              value={startTime}
+              id="startTime"
+              onChange={onChangeStartTime}
+            ></input>
+            <label htmlFor="endTime">end time</label>
+            <input
+              type="number"
+              min="6"
+              max="22"
+              value={endTime}
+              id="endTime"
+              onChange={onChangeEndTime}
+            ></input>
+            <label htmlFor="0">back</label>
+            <input
+              type="checkbox"
+              value="등"
+              id="0"
+              onChange={onChangePartForSubmit}
+            ></input>
+            <label htmlFor="1">chest</label>
+            <input
+              type="checkbox"
+              value="가슴"
+              id="1"
+              onChange={onChangePartForSubmit}
+            ></input>
+            <label htmlFor="2">arm</label>
+            <input
+              type="checkbox"
+              value="팔"
+              id="2"
+              onChange={onChangePartForSubmit}
+            ></input>
+            <label htmlFor="3">shoulder</label>
+            <input
+              type="checkbox"
+              value="어깨"
+              id="3"
+              onChange={onChangePartForSubmit}
+            ></input>
+            <label htmlFor="4">leg</label>
+            <input
+              type="checkbox"
+              value="하체"
+              id="4"
+              onChange={onChangePartForSubmit}
+            ></input>
+            <button type="submit" onSubmit={onSubmit}>
+              제출
+            </button>
+          </form>
+        </div>
+        <div className="selectTableBox">
+          <form onSubmit={onSubmitToSee}>
+            <label htmlFor="5">back</label>
+            <input
+              type="checkbox"
+              value="등"
+              id="5"
+              onChange={onChangePartToSeeTable}
+            ></input>
+            <label htmlFor="6">chest</label>
+            <input
+              type="checkbox"
+              value="가슴"
+              id="6"
+              onChange={onChangePartToSeeTable}
+            ></input>
+            <label htmlFor="7">arm</label>
+            <input
+              type="checkbox"
+              value="팔"
+              id="7"
+              onChange={onChangePartToSeeTable}
+            ></input>
+            <label htmlFor="8">shoulder</label>
+            <input
+              type="checkbox"
+              value="어깨"
+              id="8"
+              onChange={onChangePartToSeeTable}
+            ></input>
+            <label htmlFor="9">leg</label>
+            <input
+              type="checkbox"
+              value="하체"
+              id="9"
+              onChange={onChangePartToSeeTable}
+            ></input>
+            <>
+              {wantTable ? (
+                <button onClick={onSubmitToChange}>시간표다시선택</button>
+              ) : (
+                <button onSubmit={onSubmitToSee}>시간표보기</button>
+              )}
+            </>
+          </form>
+        </div>
+        <>
+          {wantTable ? (
+            <Appi
+              monday={week[0]}
+              tuesday={week[1]}
+              wednesday={week[2]}
+              thursday={week[3]}
+              friday={week[4]}
+              saturday={week[5]}
+              sunday={week[6]}
+            />
+          ) : (
+            <TestPageForTimeTable />
+          )}
+        </>
       </div>
-      <div className="selectTableBox">
-        <form onSubmit={onSubmitToSee}>
-          <label htmlFor="5">back</label>
-          <input
-            type="checkbox"
-            value="등"
-            id="5"
-            onChange={onChangePartToSeeTable}
-          ></input>
-          <label htmlFor="6">chest</label>
-          <input
-            type="checkbox"
-            value="가슴"
-            id="6"
-            onChange={onChangePartToSeeTable}
-          ></input>
-          <label htmlFor="7">arm</label>
-          <input
-            type="checkbox"
-            value="팔"
-            id="7"
-            onChange={onChangePartToSeeTable}
-          ></input>
-          <label htmlFor="8">shoulder</label>
-          <input
-            type="checkbox"
-            value="어깨"
-            id="8"
-            onChange={onChangePartToSeeTable}
-          ></input>
-          <label htmlFor="9">leg</label>
-          <input
-            type="checkbox"
-            value="하체"
-            id="9"
-            onChange={onChangePartToSeeTable}
-          ></input>
-          <>
-            {wantTable ? ( //이거 true false로 renderingw= 계속 조져주는거임 근데 onsubmitTochange는
-              <button onClick={onSubmitToChange}>시간표다시선택</button> // 버튼에서 onsubmit아니고 onclick으로 해놓음 바로 바뀔수있게
-            ) : (
-              <button onSubmit={onSubmitToSee}>시간표보기</button>
-            )}
-          </>
-        </form>
+      <div className="m_nav">
+        <Navigation isLoggedIn={isLoggedIn} />
       </div>
-      <input onChange={onChangeTest}></input>
-      <>
-        {wantTable ? (
-          <Appi
-            monday={test} //이제 여기에 구조체 들어가있는 배열
-            tuesday={test} //넣어주면 됌 [{},{},{}] 이런식
-            wednesday={test}
-            thursday={test}
-            friday={test}
-            saturday={test}
-            sunday={test}
-          />
-        ) : (
-          <TestPageForTimeTable />
-        )}
-      </>
-    </div>
+    </>
   );
 };
 export default TimetablePage;
