@@ -20,7 +20,7 @@ const Home = ({ isLoggedIn }) => {
       <div className="m_nav">
         <Navigation isLoggedIn={isLoggedIn} />
       </div>
-      <div>
+      <div style={{ height: "300px" }}>
         <Carousel>
           <Carousel.Item interval={2000}>
             <div className="famous_saying">
