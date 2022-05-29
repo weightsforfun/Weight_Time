@@ -8,7 +8,7 @@ const Navigation = ({ isLoggedIn }) => {
       <div className="nav1">
         <div className="top_c">
           <img src="img/home.png" /><br />
-          <Link to={"/Home"} style={{ textDecoration: "none", color: "white" }}>홈</Link>
+          <Link to={"/"} style={{ textDecoration: "none", color: "white" }}>홈</Link>
         </div>
         <div className="top_c">
           <img src="img/partner.png" /><br />

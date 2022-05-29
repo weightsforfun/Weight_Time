@@ -1,6 +1,7 @@
 import React from "react";
+import Navigation from "../components/Navigation";
 
-const Partner = () => {
+const Partner = ({isLoggedIn}) => {
     return (
         <div className="main_dis">
             <div className="logo_div">
@@ -15,8 +16,11 @@ const Partner = () => {
                 <img className="partner_img" src="img/partner_list6.png" />
                 <img className="partner_img" src="img/partner_list5.png" />
             </div>
-
+            <div className="m_nav">
+                <Navigation isLoggedIn={isLoggedIn} />
+            </div>
         </div>
+        
     );
 };
 export default Partner;

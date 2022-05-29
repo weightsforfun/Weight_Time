@@ -1,6 +1,7 @@
 import React from "react";
+import Navigation from "../components/Navigation";
 
-const Trainer = () => {
+const Trainer = ({isLoggedIn}) => {
     return (
         <div className="main_dis">
             <div className="logo_div">
@@ -27,6 +28,9 @@ const Trainer = () => {
                 <div className="trainer_div">
                     <img src="img/trainer_list5_b.png" />
                 </div>
+            </div>
+            <div className="m_nav">
+                <Navigation isLoggedIn={isLoggedIn} />
             </div>
         </div>
 
