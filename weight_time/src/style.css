@@ -4,11 +4,13 @@
     bottom: 0px;
     border: 2px solid red;
     background-color: #ffffff;
+    z-index: 3;
 }
 
 .main_dis {
     width: 414px;
     /* height: 896px; */
+
     border: 2px solid red;
     background-color: #000000;
     background-image: url('../public/img/background3.png');
@@ -31,6 +33,7 @@
     justify-content: space-around;
     background-color: #000000;
     color: #ffffff;
+
 
 }
 
@@ -118,4 +121,19 @@
     font-size: 24px;
     color: #000000;
     font-weight: bold;
+}
+
+.home_header {
+    width: 340px;
+    height: 180px;
+    margin: auto;
+    color: #a4a4a4;
+    background-color: #242424;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: italic;
+    padding: 20px 10px 5px 10px;
+    border-radius: 15px;
+    margin-top: 200px;
+
 }
