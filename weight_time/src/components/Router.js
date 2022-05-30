@@ -9,7 +9,7 @@ import { Navigate } from "react-router-dom";
 
 const AppRouter = ({ isLoggedIn }) => {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
         <Route
