@@ -1,7 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import {auth} from "../firebase";
+import { auth } from "../firebase";
 import AppRouter from "./Router";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [init, setInit] = useState(false);
