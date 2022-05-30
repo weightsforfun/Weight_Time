@@ -7,13 +7,13 @@ class Appi extends Component {
     this.state = {
       timetableProps: {
         events: {
-          m: this.props.monday,
-          t: this.props.tuesday,
-          w: this.props.wednesday,
-          t: this.props.thursday,
-          f: this.props.friday,
-          s: this.props.saturday,
-          s: this.props.sunday,
+          mon: this.props.monday,
+          tue: this.props.tuesday,
+          wed: this.props.wednesday,
+          thu: this.props.thursday,
+          fri: this.props.friday,
+          sat: this.props.saturday,
+          sun: this.props.sunday,
         },
         hoursInterval: [6, 24],
         timeLabel: "Time :)",

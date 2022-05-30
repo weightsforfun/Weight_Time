@@ -50,8 +50,8 @@ const TimetablePage = ({ isLoggedIn }) => {
                   ),
                   endTime: moment(
                     "2022-05-29T" +
-                      ("0" + String(Number(v) + 1)).slice(-2) +
-                      ":00:00"
+                    ("0" + String(Number(v) + 1)).slice(-2) +
+                    ":00:00"
                   ),
                 },
               ];
@@ -162,12 +162,21 @@ const TimetablePage = ({ isLoggedIn }) => {
     setWantTable(false);
   };
   return (
-    <>
+
+    <div className="main_dis" style={{ height: "1120px" }}>
+      <div className="m_nav">
+        <Navigation isLoggedIn={isLoggedIn} />
+      </div>
+      <div className="logo_div" style={{ position: "fixed", top: "0px" }}>
+        <img className="logo" src="img/logo_w.png" alt="error" />
+      </div>
       <div className="TimetablePage">
-        <h1>Timetable</h1>
-        <div className="submitBox">
+
+        <div className="submitBox" style={{ textAlign: "left", display: "inline-block", marginTop: "30px" }}>
+
           <form onSubmit={onSubmit}>
-            <select name="요일" onChange={onChangeDay}>
+            <label htmlFor="startTime">요일 :</label>
+            <select name="요일" onChange={onChangeDay} style={{ marginLeft: "20px" }} className="choose_btn">
               <option value={"월요일"}>월요일</option>
               <option value={"화요일"}>화요일</option>
               <option value={"수요일"}>수요일</option>
@@ -176,108 +185,123 @@ const TimetablePage = ({ isLoggedIn }) => {
               <option value={"토요일"}>토요일</option>
               <option value={"일요일"}>일요일</option>
             </select>
-            <label htmlFor="startTime">start time</label>
-            <input
-              type="number"
-              min="6"
-              max="22"
-              value={startTime}
-              id="startTime"
-              onChange={onChangeStartTime}
-            ></input>
-            <label htmlFor="endTime">end time</label>
-            <input
-              type="number"
-              min="6"
-              max="22"
-              value={endTime}
-              id="endTime"
-              onChange={onChangeEndTime}
-            ></input>
-            <label htmlFor="0">back</label>
-            <input
-              type="checkbox"
-              value="등"
-              id="0"
-              onChange={onChangePartForSubmit}
-            ></input>
-            <label htmlFor="1">chest</label>
-            <input
-              type="checkbox"
-              value="가슴"
-              id="1"
-              onChange={onChangePartForSubmit}
-            ></input>
-            <label htmlFor="2">arm</label>
-            <input
-              type="checkbox"
-              value="팔"
-              id="2"
-              onChange={onChangePartForSubmit}
-            ></input>
-            <label htmlFor="3">shoulder</label>
-            <input
-              type="checkbox"
-              value="어깨"
-              id="3"
-              onChange={onChangePartForSubmit}
-            ></input>
-            <label htmlFor="4">leg</label>
-            <input
-              type="checkbox"
-              value="하체"
-              id="4"
-              onChange={onChangePartForSubmit}
-            ></input>
-            <button type="submit" onSubmit={onSubmit}>
-              제출
-            </button>
+            <br />
+            <div style={{ marginTop: "20px" }}>
+              <label htmlFor="startTime">시작시간 :</label>
+              <input style={{ marginLeft: "15px" }}
+                className="choose_btn"
+                type="number"
+                min="6"
+                max="22"
+                value={startTime}
+                id="startTime"
+                onChange={onChangeStartTime}
+              ></input>
+              <label htmlFor="endTime" style={{ marginLeft: "20px" }}>마치는 시간 :</label>
+              <input style={{ marginLeft: "15px" }}
+                className="choose_btn"
+                type="number"
+                min="6"
+                max="22"
+                value={endTime}
+                id="endTime"
+                onChange={onChangeEndTime}
+              ></input><br />
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <div style={{ marginTop: "20px" }}>
+                <label htmlFor="0">back</label>
+                <input className="checkbox_margin"
+                  type="checkbox"
+                  value="등"
+                  id="0"
+                  onChange={onChangePartForSubmit}
+                ></input>
+                <label htmlFor="1" className="part_margin">chest</label>
+                <input className="checkbox_margin"
+                  type="checkbox"
+                  value="가슴"
+                  id="1"
+                  onChange={onChangePartForSubmit}
+                ></input>
+                <label htmlFor="2" className="part_margin">arm</label>
+                <input className="checkbox_margin"
+                  type="checkbox"
+                  value="팔"
+                  id="2"
+                  onChange={onChangePartForSubmit}
+                ></input>
+                <label htmlFor="3" className="part_margin">shoulder</label>
+                <input className="checkbox_margin"
+                  type="checkbox"
+                  value="어깨"
+                  id="3"
+                  onChange={onChangePartForSubmit}
+                ></input>
+                <label htmlFor="4" className="part_margin">leg</label>
+                <input className="checkbox_margin"
+                  type="checkbox"
+                  value="하체"
+                  id="4"
+                  onChange={onChangePartForSubmit}
+                ></input>
+
+                <button type="submit" onSubmit={onSubmit} style={{ marginLeft: "15px", width: "60px" }} className="choose_btn">
+                  제출
+                </button>
+              </div>
+            </div>
           </form>
         </div>
-        <div className="selectTableBox">
+        <div className="selectTableBox" style={{ marginTop: "15px" }}>
           <form onSubmit={onSubmitToSee}>
             <label htmlFor="5">back</label>
             <input
+              className="checkbox_margin"
               type="checkbox"
               value="등"
               id="5"
               onChange={onChangePartToSeeTable}
             ></input>
-            <label htmlFor="6">chest</label>
+            <label htmlFor="6" className="part_margin">chest</label>
             <input
+              className="checkbox_margin"
               type="checkbox"
               value="가슴"
               id="6"
               onChange={onChangePartToSeeTable}
             ></input>
-            <label htmlFor="7">arm</label>
+            <label htmlFor="7" className="part_margin">arm</label>
             <input
+              className="checkbox_margin"
               type="checkbox"
               value="팔"
               id="7"
               onChange={onChangePartToSeeTable}
             ></input>
-            <label htmlFor="8">shoulder</label>
+            <label htmlFor="8" className="part_margin">shoulder</label>
             <input
+              className="checkbox_margin"
               type="checkbox"
               value="어깨"
               id="8"
               onChange={onChangePartToSeeTable}
             ></input>
-            <label htmlFor="9">leg</label>
+            <label htmlFor="9" className="part_margin">leg</label>
             <input
+              className="checkbox_margin"
               type="checkbox"
               value="하체"
               id="9"
               onChange={onChangePartToSeeTable}
             ></input>
-            <>
+            <div style={{ paddingBottom: "25px" }}>
               {wantTable ? (
-                <button onClick={onSubmitToChange}>시간표다시선택</button>
+                <button onClick={onSubmitToChange} className="choose_btn" style={{ marginTop: "5px" }}>시간표다시선택</button>
               ) : (
-                <button onSubmit={onSubmitToSee}>시간표보기</button>
+                <button onSubmit={onSubmitToSee} className="choose_btn" style={{ marginTop: "5px" }}>시간표보기</button>
               )}
-            </>
+            </div>
           </form>
         </div>
         <>
@@ -296,10 +320,8 @@ const TimetablePage = ({ isLoggedIn }) => {
           )}
         </>
       </div>
-      <div className="m_nav">
-        <Navigation isLoggedIn={isLoggedIn} />
-      </div>
-    </>
+
+    </div>
   );
 };
 export default TimetablePage;
