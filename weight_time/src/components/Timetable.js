@@ -43,6 +43,7 @@ class Appi extends Component {
                   ...defaultAttributes.style,
                   background: "rgba(100,100,100,0)",
                   borderRadius: "0px",
+                  color: "black",
                 }}
               >
                 <span className={styles.event_info}>[ {event.name} ]</span>
