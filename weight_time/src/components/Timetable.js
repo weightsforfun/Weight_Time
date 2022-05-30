@@ -1,5 +1,6 @@
 import { Component } from "react";
 import Timetable from "react-timetable-events";
+import "../timetable.css";
 
 class Appi extends Component {
   constructor(props, context) {
@@ -43,7 +44,6 @@ class Appi extends Component {
                   ...defaultAttributes.style,
                   background: "rgba(100,100,100,0)",
                   borderRadius: "0px",
-                  color: "black",
                 }}
               >
                 <span className={styles.event_info}>[ {event.name} ]</span>
