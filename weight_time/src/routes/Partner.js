@@ -4,7 +4,7 @@ import Navigation from "../components/Navigation";
 const Partner = ({ isLoggedIn }) => {
   return (
     <div className="main_dis">
-      <div className="logo_div">
+      <div className="logo_div" style={{ position: "fixed", top: "0px" }}>
         <img className="logo" src="img/logo_w.png" alt="error" />
       </div>
       <div style={{ marginTop: "30px" }}>
@@ -19,6 +19,7 @@ const Partner = ({ isLoggedIn }) => {
       <div className="m_nav">
         <Navigation isLoggedIn={isLoggedIn} />
       </div>
+
     </div>
   );
 };
