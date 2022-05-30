@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Weight_Time/static/css/main.5b2a9d60.css",
-    "main.js": "/Weight_Time/static/js/main.b1da378c.js",
-    "static/media/background3.png": "/Weight_Time/static/media/background3.06be36f2299c5c596014.png",
-    "index.html": "/Weight_Time/index.html",
-    "main.5b2a9d60.css.map": "/Weight_Time/static/css/main.5b2a9d60.css.map",
-    "main.b1da378c.js.map": "/Weight_Time/static/js/main.b1da378c.js.map"
+    "main.css": "https://weightsforfun.github.io/Weight_Time/static/css/main.dc456778.css",
+    "main.js": "https://weightsforfun.github.io/Weight_Time/static/js/main.ec3630e5.js",
+    "static/media/background3.png": "https://weightsforfun.github.io/Weight_Time/static/media/background3.06be36f2299c5c596014.png",
+    "index.html": "https://weightsforfun.github.io/Weight_Time/index.html",
+    "main.dc456778.css.map": "https://weightsforfun.github.io/Weight_Time/static/css/main.dc456778.css.map",
+    "main.ec3630e5.js.map": "https://weightsforfun.github.io/Weight_Time/static/js/main.ec3630e5.js.map"
   },
   "entrypoints": [
-    "static/css/main.5b2a9d60.css",
-    "static/js/main.b1da378c.js"
+    "static/css/main.dc456778.css",
+    "static/js/main.ec3630e5.js"
   ]
 }
