@@ -12,16 +12,20 @@ const Home = ({ isLoggedIn }) => {
       <div className="logo_div" style={{ position: "fixed", top: "0px" }}>
         <img className="logo" src="img/logo_w.png" alt="error" />
         <button type="button" className="log_in">
-          <Link to={"/Auth"} className="login_font">로그인</Link>
-        </button>
+          {isLoggedIn ?
+          <Link to={"/"} className="login_font">LogOut</Link>:
+          <Link to={"/Auth"} className="login_font">LogIn</Link>
+          }
+          </button>
       </div>
 
-      {isLoggedIn ? <h1>반가워요 신찬규님</h1> : <h1>로그인해 시발</h1>}
+      
       <div className="m_nav">
         <Navigation isLoggedIn={isLoggedIn} />
       </div>
       <div className="home_header">
-        당신의 기구사용 <br />대기시간을 줄여드립니다<br /><span style={{ color: "#ffffff", fontWeight: "800", fontSize: "40px", fontStyle: "italic" }}>Weight Time</span>
+      <span style={{ color: "#ED4C05", fontWeight: "1000", fontSize: "45px", fontStyle: "italic"}}>Weight Time</span>
+      <span style={{ padding: "0px 0px 0px 10px"}}> 당신의 대기 시간을 <br /> 줄여드립니다<br /> </span>
       </div>
       <Fade bottom>
         <div style={{ height: "380px", border: "2px solid red", marginTop: "800px" }} >
