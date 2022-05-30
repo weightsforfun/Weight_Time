@@ -7,13 +7,13 @@ class Appi extends Component {
     this.state = {
       timetableProps: {
         events: {
-          monday: this.props.monday,
-          tuesday: this.props.tuesday,
-          wednesday: this.props.wednesday,
-          thursday: this.props.thursday,
-          friday: this.props.friday,
-          saturday: this.props.saturday,
-          sunday: this.props.sunday,
+          m: this.props.monday,
+          t: this.props.tuesday,
+          w: this.props.wednesday,
+          t: this.props.thursday,
+          f: this.props.friday,
+          s: this.props.saturday,
+          s: this.props.sunday,
         },
         hoursInterval: [6, 24],
         timeLabel: "Time :)",
@@ -41,14 +41,13 @@ class Appi extends Component {
                 key={event.id}
                 style={{
                   ...defaultAttributes.style,
-                  background: "#000",
-                  borderRadius: "50px",
+                  background: "rgba(100,100,100,0)",
+                  borderRadius: "0px",
                 }}
               >
                 <span className={styles.event_info}>[ {event.name} ]</span>
                 <span className={styles.event_info}>
-                  {event.startTime.format("HH:mm")} -{" "}
-                  {event.endTime.format("HH:mm")}
+                  {event.startTime.format("HH")} - {event.endTime.format("HH")}
                 </span>
               </div>
             </div>
