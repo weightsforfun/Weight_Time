@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Navigation from "../components/Navigation";
 
 const Partner = ({ isLoggedIn }) => {
@@ -6,6 +7,12 @@ const Partner = ({ isLoggedIn }) => {
     <div className="main_dis">
       <div className="logo_div" style={{ position: "fixed", top: "0px" }}>
         <img className="logo" src="img/logo_w.png" alt="error" />
+        <button type="button" className="log_in">
+          {isLoggedIn ?
+          <Link to={"/"} className="login_font">LogOut</Link>:
+          <Link to={"/Auth"} className="login_font">LogIn</Link>
+          }
+          </button>
       </div>
       <div style={{ marginTop: "30px" }}>
         <img src="img/partner_list1.png" alt="error" />

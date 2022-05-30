@@ -16,7 +16,7 @@ const AppRouter = ({ isLoggedIn }) => {
           path="/Auth"
           element={isLoggedIn ? <Navigate to="/" replace /> : <Auth />}
         />
-        <Route path="/Partner" element={<Partner />} />
+        <Route path="/Partner" element={<Partner isLoggedIn={isLoggedIn}/>} />
         <Route
           path="/TimetablePage"
           element={
@@ -25,7 +25,7 @@ const AppRouter = ({ isLoggedIn }) => {
             </>
           }
         />
-        <Route path="/Trainer" element={<Trainer />} />
+        <Route path="/Trainer" element={<Trainer isLoggedIn={isLoggedIn}/>} />
       </Routes>
     </Router>
   );

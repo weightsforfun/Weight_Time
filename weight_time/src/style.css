@@ -2,10 +2,9 @@
     width: 414px;
     position: fixed;
     bottom: 0px;
-    border: 2px solid red;
     background-color: #ffffff;
     z-index: 3;
-
+    
 }
 
 .main_dis {
@@ -13,7 +12,6 @@
     /* height: 896px; */
     padding-bottom: 80px;
     padding-top: 50px;
-    border: 2px solid red;
     background-color: #000000;
     background-image: url('../public/img/background3.png');
     background-attachment: fixed;
@@ -40,13 +38,13 @@
 }
 
 .top_c {
+    height:50px;
     font-size: 12px;
     font-weight: 700;
     color: #c4c4c4;
     text-decoration: none;
     margin-left: 20px;
-    border: 2px solid red;
-
+    margin-top: 10px;
 
 
 
@@ -55,17 +53,16 @@
 
 .logo {
     position: relative;
-    left: 28%;
-    width: 200px;
-    height: 50px;
-    border: 2px solid red;
+    top:4%;
+    left: 2%;
+    width: 150px;
+    height: 40px;
     color: #000000;
 
 }
 
 .btn_pos {
     display: inline-block;
-    border: 2px solid red;
 
 }
 
@@ -89,7 +86,6 @@
 .logo_div {
     width: 414px;
     height: 50px;
-    border: 2px solid red;
     background-color: #000000;
     display: flex;
 
@@ -99,17 +95,17 @@
 }
 
 .log_in {
-    top: 15%;
-    height: 30px;
+    top:28%;
+    height: 22px;
     position: relative;
-    left: 32%;
-    border-radius: 5px;
-    border: 2px solid red;
+    left: 42%;
+    border-radius: 50px;
+    background-color: #ED4C05;
+    width: 70;
 }
 
 .trainer_div {
     margin-top: 50px;
-    border: 2px solid red;
 }
 
 .partner_img {
@@ -126,7 +122,6 @@
 .home_header {
     width: 340px;
     height: 180px;
-    margin: auto;
     color: #ffffff;
     /* background-color: #242424; */
     font-size: 25px;
@@ -134,13 +129,19 @@
 
     padding: 20px 10px 5px 10px;
     border-radius: 15px;
-    margin-top: 200px;
-
+    margin-top: 300px;
+    display:flex;
+    text-align: start;
+    flex-wrap: wrap;
+    margin-left: 10px;
+    font-weight: bold;
 }
 
 .login_font {
+    position: relative;
     text-decoration: none;
-    color: #000000;
+    color: white;
+    bottom: 25%;
 }
 
 .login_way {
@@ -154,9 +155,9 @@
 
 }
 
-.align_button {
-
-    border: 2px solid red;
 
 
+.nav_img {
+    width:20px;
+    margin-bottom: 5px;
 }
