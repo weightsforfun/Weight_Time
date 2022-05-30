@@ -1,5 +1,6 @@
 import { Component } from "react";
 import Timetable from "react-timetable-events";
+import "../timetable.css";
 
 class Appi extends Component {
   constructor(props, context) {
