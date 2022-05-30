@@ -27,6 +27,8 @@ class Appi extends Component {
                 ...defaultAttributes.style,
                 textAlign: "center",
                 textDecoration: "underline",
+                background: "rgba(100,100,100,0)",
+                color: "black",
               }}
             >
               {hour}

@@ -9,10 +9,10 @@ import Fade from 'react-reveal/Fade';
 const Home = ({ isLoggedIn }) => {
   return (
     <div className="main_dis">
-      <div className="logo_div">
+      <div className="logo_div" style={{ position: "fixed", top: "0px" }}>
         <img className="logo" src="img/logo_w.png" alt="error" />
         <button type="button" className="log_in">
-          <Link to={"/Auth"}>로그인</Link>
+          <Link to={"/Auth"} className="login_font">로그인</Link>
         </button>
       </div>
 
@@ -21,10 +21,10 @@ const Home = ({ isLoggedIn }) => {
         <Navigation isLoggedIn={isLoggedIn} />
       </div>
       <div className="home_header">
-        당신의 기구사용 대기시간을 줄여드립니다<br /><span style={{ color: "#ffffff", fontWeight: "800" }}>Weight Time</span>
+        당신의 기구사용 <br />대기시간을 줄여드립니다<br /><span style={{ color: "#ffffff", fontWeight: "800", fontSize: "40px", fontStyle: "italic" }}>Weight Time</span>
       </div>
       <Fade bottom>
-        <div style={{ height: "300px", border: "2px solid red", marginTop: "200px" }} >
+        <div style={{ height: "380px", border: "2px solid red", marginTop: "800px" }} >
           <Carousel>
             <Carousel.Item interval={2000}>
               <div className="famous_saying">

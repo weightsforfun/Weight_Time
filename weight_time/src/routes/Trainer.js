@@ -4,7 +4,7 @@ import Navigation from "../components/Navigation";
 const Trainer = ({ isLoggedIn }) => {
   return (
     <div className="main_dis">
-      <div className="logo_div">
+      <div className="logo_div" style={{ position: "fixed", top: "0px" }}>
         <img className="logo" src="img/logo_w.png" alt="error" />
       </div>
       <div>
@@ -32,6 +32,7 @@ const Trainer = ({ isLoggedIn }) => {
       <div className="m_nav">
         <Navigation isLoggedIn={isLoggedIn} />
       </div>
+
     </div>
   );
 };
