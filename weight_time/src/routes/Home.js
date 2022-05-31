@@ -29,7 +29,7 @@ const Home = ({ isLoggedIn }) => {
       <span style={{ padding: "0px 0px 0px 10px"}}> 당신의 대기 시간을 <br /> 줄여드립니다<br /> </span>
       </div>
       <Fade bottom>
-        <div style={{ height: "380px", border: "2px solid red", marginTop: "800px" }} >
+        <div style={{ height: "380px", marginTop: "800px" }} >
           <Carousel>
             <Carousel.Item interval={2000}>
               <div className="famous_saying">
