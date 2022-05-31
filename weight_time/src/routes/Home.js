@@ -8,6 +8,7 @@ import Fade from 'react-reveal/Fade';
 
 const Home = ({ isLoggedIn }) => {
   return (
+
     <div className="main_dis">
       <div className="logo_div" style={{ position: "fixed", top: "0px" }}>
         <img className="logo" src="img/logo_w.png" alt="error" />
